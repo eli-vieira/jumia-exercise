@@ -1,43 +1,45 @@
+/*
+ * Customer Model:
+ * The objective is to build the Customer model according to the definition of 
+ * the Customer Table that is in the provided database
+ * 
+ */
+
 package jumia.exercise.customers.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import org.springframework.stereotype.Component;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Component
 public class Customer {
 	
+	//Columns id, name and phone
 	private int id;
-	private String name;
+	private String name;	
+	private String phone;   
 	
-	private String phone;
-    
-	public Customer() {		
-	}
-	
+	//Contructor of Customer
 	public Customer(int id, String name, String phone) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 	}	
 	
+	//get Id value
 	public int getId() {
 		return id;
 	}
 	
+	//get Name value
 	public String getName() {
 		return name;
 	}
 
+	//get Phone value
     public String getPhone() {
 		return phone;	
 	}
     
+    // Json output    
     @Override
     public String toString() {
         return "Customer{" + "id=" + id + ", name=" + name + ", phone=" + phone + '}';

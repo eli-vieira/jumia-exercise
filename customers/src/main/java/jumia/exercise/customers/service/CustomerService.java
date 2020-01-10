@@ -1,5 +1,10 @@
+/*
+ * Customer Service:
+ * The objective is to hold all the logic of the Application 
+ * 
+ * 
+ */
 package jumia.exercise.customers.service;
-
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,6 +20,7 @@ import jumia.exercise.customers.model.Customer;
 @Service
 public class CustomerService {
 	
+	// Connect to database SQLite
 	private Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:database/sample.db";
@@ -27,7 +33,8 @@ public class CustomerService {
         return conn;
     }	
 		
-	
+	//Selects columns in database and for each Result a new CustomerModel is Created.
+	//It returns a list of Customers.
 	public List<Customer> selectAll() {
 	        String sql = "SELECT id, name, phone FROM customer";
 	                               
@@ -57,7 +64,7 @@ public class CustomerService {
 	        
 	    }
 
-	
+	//A customer.phone is given as argument, and after splitting the string the result is the country code 	
 	public int getCodeCountry(String phone) {
 		
 		if (phone != "") {
@@ -75,13 +82,20 @@ public class CustomerService {
 		}
 	}
 	
+	/*NOT USED
+	//A customer.phone is given as argument, and after splitting the String the result is the Phone number without the country code
 	public String getPhoneNumber(String phone) {
 		String[] arrOfStr = phone.split("\\) ");		
 		String phoneStr = arrOfStr[1];
 
 		return phoneStr;
 	}
+	*/
 	
+	//An int state = 0 or state = 1 is given as argument
+	//valid if state = 1
+	//invalid if state = 0
+	//It returns a list of customers with valid or invalid state	
 	public List<Customer> selectCustomerPhoneState(int state){
 		List<Customer> allCustomers = selectAll();
 		List<Customer> ValidList = new ArrayList<Customer>(); 
@@ -105,7 +119,9 @@ public class CustomerService {
 		}	
 	}
 	
-	
+	//It checks Customer Phone state returning true or false
+	//check valid if state = 1
+	//check invalid if state = 0
 	public boolean checkStateCustomerPhone(int state, Customer customer){
 				
 		String regExp = "";		
@@ -148,7 +164,10 @@ public class CustomerService {
 		}							
 	}
 	
-	
+	//An int codeCountry is given as argument
+	//For all customers in database it checks which customers
+	//have phone number with code country = argument
+	//It returns a list of customers
 	public List<Customer> selectCustomerPhoneCountry(int codeCountry){
 		List<Customer> allCustomers = selectAll();
 		List<Customer> CountryList = new ArrayList<Customer>(); 
@@ -172,7 +191,7 @@ public class CustomerService {
 		}	
 	}
 	
-	
+	//It checks Customer Phone code country returning true or false
 	public boolean checkCountryCustomerPhone(int codeCountry, Customer customer) {								
 			
 		String phone = customer.getPhone();		
@@ -195,14 +214,5 @@ public class CustomerService {
 			return false;
 		}
 	}
-												
-	/*
-	//Initialize Country codes and names
-	Country country1 = new Country(237, "Cameron", null);
-	Country country2 = new Country(251, "Ethiopia", null);
-	Country country3 = new Country(212, "Marocco", null);
-	Country country4 = new Country(258, "Mozambique", null);
-	Country country5 = new Country(256, "Uganda", null);	
-	*/
-	
+													
 }
