@@ -17,6 +17,11 @@ public class Customer {
 	private String name;	
 	private String phone;   
 	
+	//Empty Contructor of Customer
+	public Customer() {
+
+	}	
+	
 	//Contructor of Customer
 	public Customer(int id, String name, String phone) {
 		this.id = id;
